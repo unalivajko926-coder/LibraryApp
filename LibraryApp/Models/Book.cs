@@ -6,33 +6,21 @@ using System.Threading.Tasks;
 
 namespace LibraryApp.Models
 {
-    public class Book
+    public class Book : LibraryItem
     {
-        public string Title { get; set; }
-        public string Author { get; set; }
-        public int Year { get; set; }
+        public int Pages { get; set; }
 
-        public void DisplayInfo()
+        public Book(string title, string author , int year, int pages)
+            : base (title, author, year)
         {
-            Console.WriteLine($"Название: {Title}, Автор: {Author}, Год: {Year}");
-
-
+            Pages = pages;
         }
 
-        public Book(string title, string author, int year)
+        public override void DisplayInfo()
         {
-            if (string.IsNullOrWhiteSpace(title))
-                throw new ArgumentException("Название не может быть пустым", nameof(title));
-    	    if (string.IsNullOrWhiteSpace(author))
-                throw new ArgumentException("Автор не может быть пустым", nameof(author));
-            if (year< 0 || year> DateTime.Now.Year + 1)
-                throw new ArgumentOutOfRangeException(nameof(year), "Недопустимый год издания");
-            
-            Title = title;
-            Author = author;
-            Year = year;
+            Console.WriteLine($"Книга: {Title}/ {Author} ({Year}) - {Pages} стр.");
+        }
     }
 
-}
 }
 
