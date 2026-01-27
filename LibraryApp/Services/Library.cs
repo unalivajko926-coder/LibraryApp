@@ -28,6 +28,14 @@
 	                .Select(b => b.Title)
 	                .ToList();
            }
-       }
+
+        internal IEnumerable<object> SearchByAuthor(string? author)
+        {
+            if (string.IsNullOrWhiteSpace(author))
+                return Enumerable.Empty<object>();
+
+            return GetBooksByAuthor(author).Cast<object>();
+        }
+    }
    }
 
